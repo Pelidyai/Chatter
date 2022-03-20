@@ -1,0 +1,15 @@
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\TetsWPF.csprojAssemblyReference.cache
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\MainWindow.g.cs
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\App.g.cs
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\MainWindow.baml
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\TetsWPF.csproj.GenerateResource.cache
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\TetsWPF.csproj.CoreCompileInputs.cache
+D:\PickAim\Projects\TetsWPF\TetsWPF\bin\Debug\Chatter.exe.config
+D:\PickAim\Projects\TetsWPF\TetsWPF\bin\Debug\Chatter.exe
+D:\PickAim\Projects\TetsWPF\TetsWPF\bin\Debug\Chatter.pdb
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\Chatter_MarkupCompile.cache
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\Chatter_MarkupCompile.lref
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\Chatter.g.resources
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\Chatter.Properties.Resources.resources
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\Chatter.exe
+D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Debug\Chatter.pdb
