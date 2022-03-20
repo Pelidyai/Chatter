@@ -41,6 +41,11 @@ namespace TetsWPF
         string File = "";
         string Im = "";
         string Vid = "";
+        public void UrlTextBox_GotMouseCapture(object sender, MouseEventArgs e)
+        {
+            UrlTextBox.Text = null;
+            UrlTextBox.Foreground = Brushes.Black;
+        }
         public MainWindow()
         {
             InitImports();
@@ -137,11 +142,7 @@ namespace TetsWPF
             //Console.WriteLine("tik");
         }
 
-        private void UrlTextBox_GotMouseCapture(object sender, MouseEventArgs e)
-        {
-            UrlTextBox.Text = null;
-            UrlTextBox.Foreground = Brushes.Black;
-        }
+
 
         private void CollectData_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -301,6 +302,11 @@ namespace TetsWPF
             {
                 SendMessage.CancelAsync();
             }
+        }
+
+        private void ToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }
