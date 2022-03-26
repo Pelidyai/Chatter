@@ -44,7 +44,7 @@ namespace TetsWPF
         public void UrlTextBox_GotMouseCapture(object sender, MouseEventArgs e)
         {
             UrlTextBox.Text = null;
-            UrlTextBox.Foreground = Brushes.Black;
+            UrlTextBox.Foreground = Brushes.Gray;
         }
         public MainWindow()
         {
@@ -68,7 +68,11 @@ namespace TetsWPF
         {
             GetDataButton.IsEnabled = true;
             SendButton.IsEnabled = true;
-            ErrorLabel.Content = errors;
+            if(errors!="")
+            {
+                ErrorLabel.Content = errors;
+                Height = 789.2;
+            }
             StatusLabel.Foreground = Brushes.Green;
             StatusLabel.Content = "Выполнено";
         }
@@ -273,7 +277,8 @@ namespace TetsWPF
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            Mes = StringFromRichTextBox(MessageTextBox);
+            Mes = MessageTextBox.Text;
+            //Mes = StringFromRichTextBox(MessageTextBox);
             Mes = Regex.Replace(Mes, @"\r?\n", " ");
             //Mes.Replace(Environment.NewLine, );
             File = DocTextBox.Text;
@@ -306,7 +311,17 @@ namespace TetsWPF
 
         private void ToolBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            DragMove();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

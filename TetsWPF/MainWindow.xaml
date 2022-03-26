@@ -49,26 +49,11 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-        <ControlTemplate x:Key="RichTextBoxTemplate" TargetType="{x:Type RichTextBox}">
-            <Border Name="Border"  CornerRadius="10" BorderThickness="1" Background="{TemplateBinding Background}">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                <Setter Property="Cursor" Value="IBeam"></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-            </Border>
-        </ControlTemplate>
-        
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" BorderThickness="3" BorderBrush="#5536393F" Background="{TemplateBinding Background}">
+                        <Border CornerRadius="5" BorderThickness="3" BorderBrush="#FF36393F" Background="{TemplateBinding Background}">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>
@@ -88,6 +73,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Foreground" Value="#CC888EFF"></Setter>
             <Setter Property="Background" Value="#9936393F"></Setter>
         </Style>
         <Style TargetType="Label">
@@ -106,26 +92,18 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="AcceptsReturn" Value="True"/>
             <Setter Property="Template" Value="{StaticResource TextBoxTemplate}"></Setter>
+            <Setter Property="Foreground" Value="Gray"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="#FF40444B"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <Style BasedOn="{StaticResource ResourceKey=TextBoxBase}" TargetType="TextBox" x:Key="TextBoxEvented">
             <EventSetter Event="GotMouseCapture" Handler="UrlTextBox_GotMouseCapture"></EventSetter>
         </Style>
-        <Style TargetType="RichTextBox">
-            <Setter Property="Background" Value="#9940444B"></Setter>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="AcceptsReturn" Value="True"/>
-            <Setter Property="Template" Value="{StaticResource RichTextBoxTemplate}"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="#FF40444B"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        
     </Window.Resources>
     <Border CornerRadius="40,0,40,0" BorderThickness="0" Background="#FF202225">
         <Grid Name="InnerGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,40,10,10">
@@ -133,19 +111,13 @@
             <Label Name="ChanelUrl" Content="Ссылка" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
             <TextBox Style="{ StaticResource TextBoxEvented}" Name="UrlTextBox" HorizontalAlignment="Left" Height="27" Margin="10,35.6,0,0" TextWrapping="Wrap" Text="https://t.me/chat_reference" VerticalAlignment="Top" Width="267" Foreground="Gray" FontSize="15" />
             <Button Name="GetDataButton" Content="Получит данные" HorizontalAlignment="Left" Height="27" Margin="296,35.6,0,0" VerticalAlignment="Top" Width="173" Click="GetDataButton_Click"/>
-            <CheckBox Name="checkBox1" Content="Считывать только пользователей с указанными телефонами" HorizontalAlignment="Left" Height="19.2" Margin="10,67.6,0,0" VerticalAlignment="Top" Width="459"/>
+            <CheckBox BorderThickness="2.5" Foreground="Gray" Background="Transparent" Name="checkBox1" Content="Считывать только пользователей с указанными телефонами" HorizontalAlignment="Left" Height="19.2" Margin="10,67.6,0,0" VerticalAlignment="Top" Width="459"/>
             <Label Name="StatusLabel" Content="" HorizontalAlignment="Left" Height="25.6" Margin="296,10,0,0" VerticalAlignment="Top" Width="173"/>
             <Label Name="DocLabel" Content="Документ с базой пользователей" HorizontalAlignment="Left" Margin="10,91.8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
             <TextBox Style="{StaticResource TextBoxBase}" Name="DocTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,117.4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267"/>
             <Button Name="FileButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,117.4,0,0" VerticalAlignment="Top" Width="173" Click="FileButton_Click"/>
             <Label Name="Message" Content="Сообщение:" HorizontalAlignment="Left" Margin="10,149.4,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
-            <RichTextBox Name="MessageTextBox" HorizontalAlignment="Left" Height="175" Margin="10,170,0,0" VerticalAlignment="Top" Width="459">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text=""/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
+            <TextBox Style="{StaticResource TextBoxBase}" Name="MessageTextBox" HorizontalAlignment="Left" Height="175" Margin="10,170,0,0" VerticalAlignment="Top" Width="459"/>
             <Label Name="ImageLabel" Content="Изображение" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
             <TextBox Style="{StaticResource TextBoxBase}" Name="ImageTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,381,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267"/>
             <Button Name="ImButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,381,0,0" VerticalAlignment="Top" Width="173" Click="ImButton_Click"/>
@@ -154,11 +126,16 @@
             <Button Name="VidButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,443,0,0" VerticalAlignment="Top" Width="173" Click="VidButton_Click"/>
             <Label Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="10,507,0,0" VerticalAlignment="Top" Width="34"/>
             <Button Name="SendButton" Content="Отправить" HorizontalAlignment="Left" Height="22.1" Margin="10,485.2,0,0" VerticalAlignment="Top" Width="459" Click="SendButton_Click"/>
-            <Grid Background="#FF202225" Name="ToolBar" HorizontalAlignment="Stretch" Height="35" Margin="34,-40,-10,0" VerticalAlignment="Top"  MouseLeftButtonDown="ToolBar_MouseLeftButtonDown">
-                
+            <Grid Background="#FF202225" Name="ToolBar" HorizontalAlignment="Stretch" Height="35" Margin="34,-40,75,0" VerticalAlignment="Top"  MouseLeftButtonDown="ToolBar_MouseLeftButtonDown"/>
+            <Grid HorizontalAlignment="Left" Height="35" Margin="425,-40,0,0" VerticalAlignment="Top" Width="75">
+                <Button Name="CloseButton" HorizontalAlignment="Left" Height="35" Margin="40,0,0,0" VerticalAlignment="Top" Width="35" Click="CloseButton_Click">
+                    <Image Source="pack://application:,,,/Images/cross.png"></Image>
+                </Button>
+                <Button Name="MinimizeButton" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="35" Click="MinimizeButton_Click" >
+                    <Image Source="pack://application:,,,/Images/line.png"></Image>
+                </Button>
             </Grid>
         </Grid>
     </Border>
-    
-</Window>
 
+</Window>
