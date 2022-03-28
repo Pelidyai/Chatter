@@ -1,20 +1,20 @@
-﻿<Window x:Class="TetsWPF.MainWindow"
+<Window x:Class="TetsWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TetsWPF"
         mc:Ignorable="d"
-        Title="Chatter" Height="704.4" Width="504.4" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
+        Title="Chatter" Height="589.2" Width="520" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
         <!--Control colors.-->
-        <Color x:Key="WindowColor">#FF080808</Color>
+        <Color x:Key="WindowColor">#FF40444B</Color>
         <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
 
-        <Color x:Key="SelectedBackgroundColor">#FFC8C8C8</Color>
+        <Color x:Key="SelectedBackgroundColor">#FF40444B</Color>
         <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
 
-        <Color x:Key="ControlLightColor">#99B9B9B9</Color>
+        <Color x:Key="ControlLightColor">#9940444B</Color>
         <Color x:Key="ControlMediumColor">#4440444B</Color>
 
         <Color x:Key="ControlPressedColor">#5540444B</Color>
@@ -22,7 +22,6 @@
         <Color x:Key="GlyphColor">#CC888EFF</Color>
 
         <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
-
         <ControlTemplate x:Key="TextBoxTemplate" TargetType="{x:Type TextBox}">
             <Border Name="Border"  CornerRadius="5" BorderThickness="1" Background="{TemplateBinding Background}">
                 <ScrollViewer x:Name="PART_ContentHost" />
@@ -69,7 +68,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" BorderThickness="3" BorderBrush="#FFBCBCBC" Background="{TemplateBinding Background}">
+                        <Border CornerRadius="5" BorderThickness="3" BorderBrush="#FF36393F" Background="{TemplateBinding Background}">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>
@@ -83,72 +82,15 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFCECECE"></Setter>
+                                <Setter Property="Background" Value="#FF40444B"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="Foreground" Value="#CC888EFF"></Setter>
-            <Setter Property="Background" Value="#99B9B9B9"></Setter>
+            <Setter Property="Background" Value="#9936393F"></Setter>
         </Style>
-
-        <Style x:Key="CrossButton" TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="50" BorderThickness="3" BorderBrush="#FFFF0000" Background="{TemplateBinding Background}">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="BorderBrush" Value="#FFFF0000"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFFF0000"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="#CC888EFF"></Setter>
-            <Setter Property="Background" Value="#AAFF0000"></Setter>
-        </Style>
-
-        <Style x:Key="LineButton" TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="50" BorderThickness="3" BorderBrush="#FFFFFF00" Background="{TemplateBinding Background}">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="BorderBrush" Value="#9936393F"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFFFFF00"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="#CC888EFF"></Setter>
-            <Setter Property="Background" Value="#AAFFFF00"></Setter>
-        </Style>
-
         <Style TargetType="Label">
             <Setter Property="Template">
                 <Setter.Value>
@@ -168,7 +110,7 @@
             <Setter Property="Foreground" Value="Gray"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="#FFC8C8C8"></Setter>
+                    <Setter Property="Background" Value="#FF40444B"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -176,6 +118,10 @@
         <Style BasedOn="{StaticResource ResourceKey=TextBoxBase}" TargetType="TextBox" x:Key="TextBoxEvented">
             <EventSetter Event="GotMouseCapture" Handler="UrlTextBox_GotMouseCapture"></EventSetter>
         </Style>
+
+        
+
+
 
         <ControlTemplate x:Key="ComboBoxToggleButton"
                  TargetType="{x:Type ToggleButton}">
@@ -209,7 +155,7 @@
                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).
                 (SolidColorBrush.Color)"
                                           Storyboard.TargetName="Arrow">
-
+                                    
                                 </ColorAnimationUsingKeyFrames>
                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).
                 (GradientBrush.GradientStops)[1].(GradientStop.Color)"
@@ -316,7 +262,7 @@
                                         <Storyboard>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_EditableTextBox"
                                                 Storyboard.TargetProperty="(TextElement.Foreground).
-                      (SolidColorBrush.Color)">
+                      (SolidColorBrush.Color)">                                                
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -382,7 +328,7 @@
                                             <SolidColorBrush Color="#FF50545B" />
                                         </Border.BorderBrush>
                                         <Border.Background>
-                                            <SolidColorBrush Color="#FFCECECE" />
+                                            <SolidColorBrush Color="#FF50545B" />
                                         </Border.Background>
                                     </Border>
                                     <ScrollViewer Margin="4,6,4,6"
@@ -392,12 +338,12 @@
                                     </ScrollViewer>
                                 </Grid>
                             </Popup>
-                            <Border CornerRadius="5" BorderThickness="3" BorderBrush="#FFCECECE" Background="{TemplateBinding Background}">
+                            <Border CornerRadius="5" BorderThickness="3" BorderBrush="#FF36393F" Background="{TemplateBinding Background}">
                                 <Border.Style>
                                     <Style TargetType="Border">
                                         <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="BorderBrush" Value="#FFCECECE"></Setter>
+                                                <Setter Property="BorderBrush" Value="#9936393F"></Setter>
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
@@ -479,46 +425,39 @@
 
 
     </Window.Resources>
-    <Border CornerRadius="40,0,40,0" BorderThickness="0" Background="#FFC8C8C8">
+    <Border CornerRadius="40,0,40,0" BorderThickness="0" Background="#FF202225">
         <Grid Name="InnerGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,40,10,10">
-            <Border CornerRadius="30" Background="White" Margin="0,-11,0,-1">
-            </Border>
-            <Grid Margin="0,565,268,28.4">
-                <Image x:Name="PickIm" Source="Images/PickAimLogo.png" Margin="10,0,0,-1"></Image>
-            </Grid>
-            <Label Name="L1" Foreground="Gray" Content="Разработчик: Пилецкий Дмитрий" HorizontalAlignment="Left" Height="20" Margin="27,624,0,0" VerticalAlignment="Top" Width="213"/>
-            <Label Name ="L2" Foreground="Gray" Content="Для связи: dima-pile@mail.ru" HorizontalAlignment="Left" Height="20" Margin="27,635,0,-1" VerticalAlignment="Top" Width="213"/>
-            <Label Name="ChanelUrl" Content="Ссылка" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
-            <TextBox Style="{ StaticResource TextBoxEvented}" Name="UrlTextBox" HorizontalAlignment="Left" Height="27" Margin="10,82,0,0" TextWrapping="Wrap" Text="https://t.me/chat_reference" VerticalAlignment="Top" Width="267" Foreground="Gray" FontSize="15" Background="#3340444B" />
-            <Button Name="GetDataButton" Content="Получит данные" HorizontalAlignment="Left" Height="27" Margin="296,82,0,0" VerticalAlignment="Top" Width="173" Click="GetDataButton_Click"/>
-            <CheckBox BorderThickness="2.5" Foreground="Gray" Background="Transparent" Name="checkBox1" Content="Считывать только пользователей с указанными телефонами" HorizontalAlignment="Left" Height="20" Margin="10,114,0,0" VerticalAlignment="Top" Width="459"/>
-            <Label Name="StatusLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="296,57,0,0" VerticalAlignment="Top" Width="173"/>
-            <Label Name="DocLabel" Content="Документ с базой пользователей" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
-            <TextBox Style="{StaticResource TextBoxBase}" Name="DocTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267" Background="#3340444B"/>
-            <Button Name="FileButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,164,0,0" VerticalAlignment="Top" Width="173" Click="FileButton_Click"/>
-            <Label Name="Message" Content="Сообщение:" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
-            <TextBox Style="{StaticResource TextBoxBase}" Name="MessageTextBox" HorizontalAlignment="Left" Height="175" Margin="10,217,0,0" VerticalAlignment="Top" Width="459" Background="#3340444B"/>
-            <Label Name="ImageLabel" Content="Изображение" HorizontalAlignment="Left" Margin="10,407,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
-            <TextBox Style="{StaticResource TextBoxBase}" Name="ImageTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,428,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267" Background="#3340444B"/>
-            <Button Name="ImButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,428,0,0" VerticalAlignment="Top" Width="173" Click="ImButton_Click"/>
-            <Label Name="VidLabel" Content="Видеозапись" HorizontalAlignment="Left" Margin="10,469,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
-            <TextBox Style="{StaticResource TextBoxBase}" Name="VidTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,490,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267" Background="#3340444B"/>
-            <Button Name="VidButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,490,0,0" VerticalAlignment="Top" Width="173" Click="VidButton_Click"/>
-            <Label Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="10,554,0,0" VerticalAlignment="Top" Width="459" FontSize="9"/>
-            <Button Name="SendButton" Content="Отправить" HorizontalAlignment="Left" Height="22" Margin="10,532,0,0" VerticalAlignment="Top" Width="459" Click="SendButton_Click"/>
-            <Grid Background="#FFC8C8C8" Name="ToolBar" HorizontalAlignment="Stretch" Height="24" Margin="34,-40,98,0" VerticalAlignment="Top"  MouseLeftButtonDown="ToolBar_MouseLeftButtonDown"/>
-            <Grid HorizontalAlignment="Left" Height="29" Margin="409,-40,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.183,0.411">
-                <Button Style="{StaticResource CrossButton}" Name="CloseButton" HorizontalAlignment="Left" Height="22" Margin="35,4,0,0" VerticalAlignment="Top" Width="24" Click="CloseButton_Click">
+            <Border CornerRadius="30" Background="#FF2F3136" Margin="0,0,0,-0.4"/>
+            <Label Name="ChanelUrl" Content="Ссылка" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
+            <TextBox Style="{ StaticResource TextBoxEvented}" Name="UrlTextBox" HorizontalAlignment="Left" Height="27" Margin="10,35.6,0,0" TextWrapping="Wrap" Text="https://t.me/chat_reference" VerticalAlignment="Top" Width="267" Foreground="Gray" FontSize="15" />
+            <Button Name="GetDataButton" Content="Получит данные" HorizontalAlignment="Left" Height="27" Margin="296,35.6,0,0" VerticalAlignment="Top" Width="173" Click="GetDataButton_Click"/>
+            <CheckBox BorderThickness="2.5" Foreground="Gray" Background="Transparent" Name="checkBox1" Content="Считывать только пользователей с указанными телефонами" HorizontalAlignment="Left" Height="19.2" Margin="10,67.6,0,0" VerticalAlignment="Top" Width="459"/>
+            <Label Name="StatusLabel" Content="" HorizontalAlignment="Left" Height="25.6" Margin="296,10,0,0" VerticalAlignment="Top" Width="173"/>
+            <Label Name="DocLabel" Content="Документ с базой пользователей" HorizontalAlignment="Left" Margin="10,91.8,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
+            <TextBox Style="{StaticResource TextBoxBase}" Name="DocTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,117.4,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267"/>
+            <Button Name="FileButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,117.4,0,0" VerticalAlignment="Top" Width="173" Click="FileButton_Click"/>
+            <Label Name="Message" Content="Сообщение:" HorizontalAlignment="Left" Margin="10,149.4,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
+            <TextBox Style="{StaticResource TextBoxBase}" Name="MessageTextBox" HorizontalAlignment="Left" Height="175" Margin="10,170,0,0" VerticalAlignment="Top" Width="459"/>
+            <Label Name="ImageLabel" Content="Изображение" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
+            <TextBox Style="{StaticResource TextBoxBase}" Name="ImageTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,381,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267"/>
+            <Button Name="ImButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,381,0,0" VerticalAlignment="Top" Width="173" Click="ImButton_Click"/>
+            <Label Name="VidLabel" Content="Видеозапись" HorizontalAlignment="Left" Margin="10,422.6,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
+            <TextBox Style="{StaticResource TextBoxBase}" Name="VidTextBox" HorizontalAlignment="Left" FontSize="15" Height="27" Margin="10,443,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="267"/>
+            <Button Name="VidButton" Content="Обзор..." HorizontalAlignment="Left" Height="27" Margin="296,443,0,0" VerticalAlignment="Top" Width="173" Click="VidButton_Click"/>
+            <Label Name="ErrorLabel" Content="" HorizontalAlignment="Left" Margin="10,507,0,0" VerticalAlignment="Top" Width="34"/>
+            <Button Name="SendButton" Content="Отправить" HorizontalAlignment="Left" Height="22.1" Margin="10,485.2,0,0" VerticalAlignment="Top" Width="459" Click="SendButton_Click"/>
+            <Grid Background="#FF202225" Name="ToolBar" HorizontalAlignment="Stretch" Height="35" Margin="34,-40,75,0" VerticalAlignment="Top"  MouseLeftButtonDown="ToolBar_MouseLeftButtonDown"/>
+            <Grid HorizontalAlignment="Left" Height="35" Margin="425,-40,0,0" VerticalAlignment="Top" Width="75">
+                <Button Name="CloseButton" HorizontalAlignment="Left" Height="32" Margin="40,3,0,0" VerticalAlignment="Top" Width="35" Click="CloseButton_Click">
                     <Image Source="pack://application:,,,/Images/cross.png"></Image>
                 </Button>
-                <Button Style="{StaticResource LineButton}" Name="MinimizeButton" HorizontalAlignment="Left"  Height="22" Margin="9,4,0,0"  VerticalAlignment="Top" Width="23" Click="MinimizeButton_Click" >
+                <Button Name="MinimizeButton" HorizontalAlignment="Left"  Height="32" Margin="0,3,0,0"  VerticalAlignment="Top" Width="35" Click="MinimizeButton_Click" >
                     <Image Source="pack://application:,,,/Images/line.png"></Image>
                 </Button>
             </Grid>
-            <Image Source="pack://application:,,,/Images/logo.png"  Margin="5,4,5,596"></Image>
-            <Image Name ="BAIm" Source="pack://application:,,,/Images/BA.png" Margin="221,566,14,19"></Image>
-            <ComboBox Name="SendTypeComboBox" HorizontalAlignment="Left" Height="25" Margin="296,134,0,0" VerticalAlignment="Top" Width="173" SelectionChanged="SendTypeComboBox_SelectionChanged">
-                <ComboBoxItem IsSelected="True" >Telegram</ComboBoxItem>
+
+            <ComboBox HorizontalAlignment="Left" Height="25" Margin="296,87,0,0" VerticalAlignment="Top" Width="173">
+                <ComboBoxItem>Telegram</ComboBoxItem>
                 <ComboBoxItem>WhatsApp</ComboBoxItem>
             </ComboBox>
         </Grid>

@@ -27,7 +27,8 @@ namespace TetsWPF
     {
         BackgroundWorker CollectData = new BackgroundWorker();
         BackgroundWorker StatusChange = new BackgroundWorker();
-        BackgroundWorker SendMessage = new BackgroundWorker();
+        BackgroundWorker SendTelegramMessage = new BackgroundWorker();
+        BackgroundWorker SendWhatsAppMessage = new BackgroundWorker();
 
         OpenFileDialog openFileDialog = new OpenFileDialog();
         bool is_work = false;
@@ -35,7 +36,6 @@ namespace TetsWPF
         string errors = "";
         bool is_tel = false;
         string outp = "";
-
 
         string Mes = "";
         string File = "";
@@ -53,11 +53,13 @@ namespace TetsWPF
             StatusChange.WorkerReportsProgress = true;
             CollectData.WorkerSupportsCancellation = true;
             StatusChange.WorkerSupportsCancellation = true;
+            SendWhatsAppMessage.WorkerSupportsCancellation = true;
 
             CollectData.DoWork += new System.ComponentModel.DoWorkEventHandler(CollectData_DoWork);
             StatusChange.DoWork += new System.ComponentModel.DoWorkEventHandler(StatusChange_DoWork);
             this.StatusChange.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(StatusChanged_ProgressChanged);
-            SendMessage.DoWork += new System.ComponentModel.DoWorkEventHandler(SendMessage_DoWork);
+            SendTelegramMessage.DoWork += new System.ComponentModel.DoWorkEventHandler(SendTelegramMessage_DoWork);
+            SendWhatsAppMessage.DoWork += new System.ComponentModel.DoWorkEventHandler(SendWhatsAppMessage_DoWork);
 
             InitializeComponent();
 
@@ -68,10 +70,21 @@ namespace TetsWPF
         {
             GetDataButton.IsEnabled = true;
             SendButton.IsEnabled = true;
-            if(errors!="")
+            if (errors != "")
             {
+                PickIm.Visibility = Visibility.Hidden;
+                BAIm.Visibility = Visibility.Hidden;
+                L1.Visibility = Visibility.Hidden;
+                L2.Visibility = Visibility.Hidden;
                 ErrorLabel.Content = errors;
                 Height = 789.2;
+            }
+            else
+            {
+                PickIm.Visibility = Visibility.Visible;
+                BAIm.Visibility = Visibility.Visible;
+                L1.Visibility = Visibility.Visible;
+                L2.Visibility = Visibility.Visible;
             }
             StatusLabel.Foreground = Brushes.Green;
             StatusLabel.Content = "Выполнено";
@@ -90,6 +103,8 @@ namespace TetsWPF
 
                     string script1 = "python -m pip install --upgrade pip";
                     string script2 = "pip3 install telethon";
+                    string script3 = "pip3 install pywhatkit";
+                    string script4 = "pip3 install flask";
 
                     startInfo.UseShellExecute = false;
                     startInfo.CreateNoWindow = false;
@@ -101,6 +116,8 @@ namespace TetsWPF
                     {
                         process.StandardInput.WriteLine(script1);
                         process.StandardInput.WriteLine(script2);
+                        process.StandardInput.WriteLine(script3);
+                        process.StandardInput.WriteLine(script4);
                         process.StandardInput.Close();
                     }
                     is_init = true;
@@ -145,8 +162,6 @@ namespace TetsWPF
 
             //Console.WriteLine("tik");
         }
-
-
 
         private void CollectData_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -204,13 +219,45 @@ namespace TetsWPF
             StatusLabel.Dispatcher.Invoke(new MyDelegate(DelegateMethod), myArray);
         }
 
-        private void SendMessage_DoWork(object sender, DoWorkEventArgs e)
+        private void SendTelegramMessage_DoWork(object sender, DoWorkEventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo("cmd");
 
             string dir = System.IO.Directory.GetCurrentDirectory();
             // string dir = "D:\\PickAim\\Projects\\ChatParser\\";
             string script = "python " + dir + "\\Sender.py -f \"" + File + "\" -m \"" + Mes + "\" -p \"" + Im + "\" -v \"" + Vid + "\"";
+            startInfo.WorkingDirectory = dir;
+            //startInfo.Arguments = script;
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+            startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.RedirectStandardOutput = true;
+
+            Console.WriteLine(script);
+            using (var process = Process.Start(startInfo))
+            {
+                process.StandardInput.WriteLine(script);
+                process.StandardInput.Close();
+                //Console.WriteLine("start2");
+                errors = process.StandardError.ReadToEnd();
+                outp = process.StandardOutput.ReadToEnd();
+            }
+            //Console.WriteLine(outp);
+            Mes = "";
+            File = "";
+            Im = "";
+            Vid = "";
+            is_work = false;
+        }
+
+        private void SendWhatsAppMessage_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("cmd");
+
+            string dir = System.IO.Directory.GetCurrentDirectory();
+            // string dir = "D:\\PickAim\\Projects\\ChatParser\\";
+            string script = "python " + dir + "\\WhatsSender.py -f \"" + File + "\" -m \"" + Mes + "\"";
             startInfo.WorkingDirectory = dir;
             //startInfo.Arguments = script;
             startInfo.UseShellExecute = false;
@@ -262,19 +309,7 @@ namespace TetsWPF
                 VidTextBox.Text = openFileDialog.FileName;
             }
         }
-        string StringFromRichTextBox(RichTextBox rtb)
-        {
-            TextRange textRange = new TextRange(
-                // TextPointer to the start of content in the RichTextBox.
-                rtb.Document.ContentStart,
-                // TextPointer to the end of content in the RichTextBox.
-                rtb.Document.ContentEnd
-            );
 
-            // The Text property on a TextRange object returns a string
-            // representing the plain text content of the TextRange.
-            return textRange.Text;
-        }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             Mes = MessageTextBox.Text;
@@ -288,24 +323,49 @@ namespace TetsWPF
             //Console.WriteLine(File);
             //Console.WriteLine(Im);
             //Console.WriteLine(Vid);
-            if (SendMessage.IsBusy != true)
+            if (SendTypeComboBox.SelectedIndex == 0)
             {
-                SendMessage.RunWorkerAsync();
+                if (SendTelegramMessage.IsBusy != true)
+                {
+                    SendTelegramMessage.RunWorkerAsync();
+                }
+                is_work = true;
+                SendButton.IsEnabled = false;
+                if (StatusChange.IsBusy != true)
+                {
+                    StatusLabel.Foreground = Brushes.Red;
+                    StatusChange.RunWorkerAsync();
+                }
+                if (StatusChange.WorkerSupportsCancellation == true)
+                {
+                    StatusChange.CancelAsync();
+                }
+                if (SendTelegramMessage.WorkerSupportsCancellation == true)
+                {
+                    SendTelegramMessage.CancelAsync();
+                }
             }
-            is_work = true;
-            SendButton.IsEnabled = false;
-            if (StatusChange.IsBusy != true)
+            else
             {
-                StatusLabel.Foreground = Brushes.Red;
-                StatusChange.RunWorkerAsync();
-            }
-            if (StatusChange.WorkerSupportsCancellation == true)
-            {
-                StatusChange.CancelAsync();
-            }
-            if (SendMessage.WorkerSupportsCancellation == true)
-            {
-                SendMessage.CancelAsync();
+                if (SendWhatsAppMessage.IsBusy != true)
+                {
+                    SendWhatsAppMessage.RunWorkerAsync();
+                }
+                is_work = true;
+                SendButton.IsEnabled = false;
+                if (StatusChange.IsBusy != true)
+                {
+                    StatusLabel.Foreground = Brushes.Red;
+                    StatusChange.RunWorkerAsync();
+                }
+                if (StatusChange.WorkerSupportsCancellation == true)
+                {
+                    StatusChange.CancelAsync();
+                }
+                if (SendWhatsAppMessage.WorkerSupportsCancellation == true)
+                {
+                    SendWhatsAppMessage.CancelAsync();
+                }
             }
         }
 
@@ -322,6 +382,30 @@ namespace TetsWPF
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void SendTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SendTypeComboBox.SelectedIndex == 0)
+            {
+                ImageLabel.Visibility = Visibility.Visible;
+                ImButton.Visibility = Visibility.Visible;
+                ImageTextBox.Visibility = Visibility.Visible;
+
+                VidLabel.Visibility = Visibility.Visible;
+                VidButton.Visibility = Visibility.Visible;
+                VidTextBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ImageLabel.Visibility = Visibility.Hidden;
+                ImButton.Visibility = Visibility.Hidden;
+                ImageTextBox.Visibility = Visibility.Hidden;
+
+                VidLabel.Visibility = Visibility.Hidden;
+                VidButton.Visibility = Visibility.Hidden;
+                VidTextBox.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
