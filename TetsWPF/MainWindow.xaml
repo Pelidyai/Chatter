@@ -481,13 +481,10 @@
     </Window.Resources>
     <Border CornerRadius="40,0,40,0" BorderThickness="0" Background="#FFC8C8C8">
         <Grid Name="InnerGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,40,10,10">
-            <Border CornerRadius="30" Background="White" Margin="0,-11,0,-1">
+            <Border CornerRadius="30" Background="White" Margin="0,-6,0,-1">
             </Border>
-            <Grid Margin="0,565,268,28.4">
-                <Image x:Name="PickIm" Source="Images/PickAimLogo.png" Margin="10,0,0,-1"></Image>
-            </Grid>
-            <Label Name="L1" Foreground="Gray" Content="Разработчик: Пилецкий Дмитрий" HorizontalAlignment="Left" Height="20" Margin="27,624,0,0" VerticalAlignment="Top" Width="213"/>
-            <Label Name ="L2" Foreground="Gray" Content="Для связи: dima-pile@mail.ru" HorizontalAlignment="Left" Height="20" Margin="27,635,0,-1" VerticalAlignment="Top" Width="213"/>
+            <Label Name="L1" Foreground="Gray" Content="Разработчик: Пилецкий Дмитрий, PickAim" HorizontalAlignment="Left" Height="20" Margin="236,624,0,0" VerticalAlignment="Top" Width="233"/>
+            <Label Name ="L2" Foreground="Gray" Content="Для связи: dima-pile@mail.ru" HorizontalAlignment="Left" Height="20" Margin="236,635,0,-1" VerticalAlignment="Top" Width="233"/>
             <Label Name="ChanelUrl" Content="Ссылка" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.469,-2.984"/>
             <TextBox Style="{ StaticResource TextBoxEvented}" Name="UrlTextBox" HorizontalAlignment="Left" Height="27" Margin="10,82,0,0" TextWrapping="Wrap" Text="https://t.me/chat_reference" VerticalAlignment="Top" Width="267" Foreground="Gray" FontSize="15" Background="#3340444B" />
             <Button Name="GetDataButton" Content="Получит данные" HorizontalAlignment="Left" Height="27" Margin="296,82,0,0" VerticalAlignment="Top" Width="173" Click="GetDataButton_Click"/>
@@ -516,7 +513,7 @@
                 </Button>
             </Grid>
             <Image Source="pack://application:,,,/Images/logo.png"  Margin="5,4,5,596"></Image>
-            <Image Name ="BAIm" Source="pack://application:,,,/Images/BA.png" Margin="221,566,14,19"></Image>
+            <Image Name ="BAIm" Source="pack://application:,,,/Images/BA.png" Margin="12,566,12,19"></Image>
             <ComboBox Name="SendTypeComboBox" HorizontalAlignment="Left" Height="25" Margin="296,134,0,0" VerticalAlignment="Top" Width="173" SelectionChanged="SendTypeComboBox_SelectionChanged">
                 <ComboBoxItem IsSelected="True" >Telegram</ComboBoxItem>
                 <ComboBoxItem>WhatsApp</ComboBoxItem>

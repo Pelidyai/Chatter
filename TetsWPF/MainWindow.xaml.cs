@@ -20,6 +20,8 @@ using System.Windows.Shapes;
 
 namespace TetsWPF
 {
+
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -72,7 +74,6 @@ namespace TetsWPF
             SendButton.IsEnabled = true;
             if (errors != "")
             {
-                PickIm.Visibility = Visibility.Hidden;
                 BAIm.Visibility = Visibility.Hidden;
                 L1.Visibility = Visibility.Hidden;
                 L2.Visibility = Visibility.Hidden;
@@ -81,7 +82,6 @@ namespace TetsWPF
             }
             else
             {
-                PickIm.Visibility = Visibility.Visible;
                 BAIm.Visibility = Visibility.Visible;
                 L1.Visibility = Visibility.Visible;
                 L2.Visibility = Visibility.Visible;
@@ -93,12 +93,24 @@ namespace TetsWPF
         public void InitImports()
         {
             Boolean is_init = false;
-            using (StreamReader reader = new StreamReader("init.conf"))
+            DateTime startDate = System.IO.File.GetCreationTime("confs\\date.txt");
+            string monthN = "";
+            using (StreamReader reader = new StreamReader("confs\\timeConf.txt"))
+            {
+                monthN = reader.ReadToEnd();
+            }
+            var delta = DateTime.Now - startDate;
+            if (delta.Days > 30 * Convert.ToInt32(monthN))
+            {
+                MessageBox.Show("Лицензия кончилась", "Ошибка лицензирования", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
+
+            using (StreamReader reader = new StreamReader("confs\\init.conf"))
             {
                 string text = reader.ReadToEnd();
                 if (text == "")
                 {
-
                     ProcessStartInfo startInfo = new ProcessStartInfo("cmd");
 
                     string script1 = "python -m pip install --upgrade pip";
@@ -125,7 +137,7 @@ namespace TetsWPF
             }
             if (is_init)
             {
-                using (StreamWriter writer = new StreamWriter("init.conf", false))
+                using (StreamWriter writer = new StreamWriter("confs\\init.conf", false))
                 {
                     writer.Write("1");
                 }
