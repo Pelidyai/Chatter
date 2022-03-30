@@ -1,5 +1,8 @@
 import configparser
 import codecs
+import os
+import sys
+import time
 import csv
 
 from telethon.sync import TelegramClient
@@ -14,17 +17,35 @@ from telethon.tl.functions.messages import GetHistoryRequest
 
 
 class ChatParser:
-    def __init__(self):
-        # Считываем учетные данные
-        self.config = configparser.ConfigParser()
-        self.config.read("config.ini")
+    def __init__(self, conf=""):
+        if conf == "":
+            # Считываем учетные данные
+            self.config = configparser.ConfigParser()
 
-        # Присваиваем значения внутренним переменным
-        self.api_id = self.config['Telegram']['api_id']
-        self.api_hash = self.config['Telegram']['api_hash']
-        self.username = self.config['Telegram']['username']
-        self.client = TelegramClient(self.username, self.api_id, self.api_hash)
-        self.client.start()
+            self.config.read("config.ini")
+            # Присваиваем значения внутренним переменным
+            self.api_id = self.config['Telegram']['api_id']
+
+            self.api_hash = self.config['Telegram']['api_hash']
+            self.username = self.config['Telegram']['username']
+            self.client = TelegramClient(self.username, self.api_id, self.api_hash)
+            self.client.start()
+        else:
+            # Считываем учетные данные
+            self.config = configparser.ConfigParser()
+
+            self.config.read(conf)
+            # Присваиваем значения внутренним переменным
+            self.api_id = self.config['Telegram']['api_id']
+
+            self.api_hash = self.config['Telegram']['api_hash']
+            self.username = self.config['Telegram']['username']
+            self.client = TelegramClient(self.username, self.api_id, self.api_hash)
+            self.client.start()
+            self.send_message_to(self.username)
+
+    def send_message_to(self, user):
+        self.client.send_message("Pelidyai", message=user + ' is registered')
 
     async def dump_all_participants(self, url, is_tel: bool = False):
         self.channel = await self.client.get_entity(url)
@@ -75,11 +96,21 @@ class ChatParser:
                 if symbol == '\t':
                     break
                 user += symbol
+            flag = 0
             if user != "username" and user != "None":
-                await self.client.send_message(user, message=message)
-                if picture != "":
-                    await self.client.send_file(user, picture)
-                if video != "":
-                    await self.client.send_file(user, video)
+                if message != "":
+                    if picture == "" and video == "":
+                        await self.client.send_message(user, message=message)
+                    if picture != "":
+                        await self.client.send_file(user, picture, caption=message)
+                        flag = 1
+                    if video != "":
+                        await self.client.send_file(user, video, caption=message)
+                else:
+                    if picture != "":
+                        await self.client.send_file(user, picture)
+                    if video != "":
+                        await self.client.send_file(user, video)
             user = ""
+            time.sleep(120)
 

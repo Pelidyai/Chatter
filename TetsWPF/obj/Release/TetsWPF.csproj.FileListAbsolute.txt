@@ -12,4 +12,3 @@ D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Release\Chatter.g.resources
 D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Release\Chatter.Properties.Resources.resources
 D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Release\Chatter.exe
 D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Release\Chatter.pdb
-D:\PickAim\Projects\TetsWPF\TetsWPF\obj\Release\TetsWPF.csprojAssemblyReference.cache
